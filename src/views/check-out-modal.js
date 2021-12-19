@@ -7,7 +7,7 @@ import {
   StripeProvider,
   useStripe,
 } from '@stripe/stripe-react-native';
-import {PUBLISHABLE_KEY} from '../config';
+import Config from 'react-native-config';
 
 const styles = StyleSheet.create({
   text: {
@@ -57,7 +57,7 @@ const CheckOut = ({isVisable, toggle, handleSuccess}) => {
   const [loading, showLoading] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/create-payment-intent', {
+    fetch(`${Config.API_URL}create-payment-intent`, {
       method: 'POST',
     })
       .then(res => res.json())
@@ -85,7 +85,7 @@ const CheckOut = ({isVisable, toggle, handleSuccess}) => {
 
   return (
     <StripeProvider
-      publishableKey={PUBLISHABLE_KEY}
+      publishableKey={Config.PUBLISHABLE_KEY}
       merchantIdentifier="merchant.identifier">
       <Modal
         visible={isVisable || false}
