@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Geolocation from '@react-native-community/geolocation';
-import {StyleSheet, View, Alert} from 'react-native';
-import MapView, {Marker, Polyline} from 'react-native-maps';
+import {StyleSheet, View, Alert, Platform} from 'react-native';
+import MapView, {Marker, Polyline, PROVIDER_GOOGLE} from 'react-native-maps';
 import Button from './src/components/common/Button';
 import CheckOut from './src/views/check-out-modal';
 import Images from './assets/images';
@@ -68,6 +68,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <MapView
+        provider={Platform.OS === 'android' && PROVIDER_GOOGLE}
         mapType={'standard'}
         moveOnMarkerPress={false}
         style={styles.map}
